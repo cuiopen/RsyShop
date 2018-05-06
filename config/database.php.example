@@ -1,0 +1,29 @@
+<?php
+
+/*
+ * This file is part of the RsyShop package
+ *
+ * (c) Dreamans <dreamans@rsycoder.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+return [
+    'connection' => [
+        'host' => '{mysql_host_name}',
+        'port' => {mysql_host_port},
+        'user' => '{mysql_conn_user}',
+        'pass' => '{mysql_conn_password}',
+        'db' => '{dbname}',
+        'tb_prefix' => 'rsy_',
+        'query_success_cb' => function($params) {
+            $message = sprintf('sql[%s] cost[%sms] prepare[%s]', $params->sql, $params->execTime, json_encode($params->prepare));
+            RecordLog()->sql($message);
+        },
+        'query_error_cb' => function($params) {
+            $message = sprintf('MySQL Error %s(%s): %s sql[%s] prepare[%s]', $params->errorInfo[1], $params->errorInfo[0], $params->errorInfo[2], $params->sql, json_encode($params->prepare));
+            RecordLog()->error($message);
+        },
+    ],
+];
