@@ -13,6 +13,7 @@ namespace App\Controllers;
 
 use Nimble\View\View;
 use Nimble\Validator\Validator;
+use App\Enums\ErrorEnum;
 
 class Controller
 {
@@ -23,6 +24,12 @@ class Controller
     protected $response;
 
     protected $view;
+
+    protected $errorCode = 0;
+
+    protected $errorMessage = "";
+
+    protected $respData = [];
 
     public function __construct($container)
     {
@@ -65,6 +72,8 @@ class Controller
     {
         $valid = $this->validator($validReg, $validMsg);
         if (true != $valid->validate) {
+            $this->errorCode = ErrorEnum::PARAM_ERRYR;
+            $this->errorMessage = $valid->firstMessage;
             return false;
         }
         return true;
@@ -73,5 +82,26 @@ class Controller
     protected function setHeader($key, $val)
     {
         $this->response->setHeader($key, $val);
+    }
+
+    protected function outputJson($data = [], $errno = 0, $message = 'success')
+    {
+        $this->container->contentType = 'application/json';
+        return json_encode([
+            'errno'   => $errno,
+            'message' => $message,
+            'data'    => $data,
+        ]);
+    }
+
+    protected function outputErrorJson($error, $message = '')
+    {
+        $arrError = explode("=>", $error);
+        $errCode = isset($arrError[0]) ? $arrError[0] : 1;
+        $errMsg = isset($arrError[1]) ? $arrError[1] : 'System Error';
+        if ($message) {
+            $errMsg .= ", {$message}";
+        }
+        return $this->outputJson([], $errCode, $errMsg);
     }
 }

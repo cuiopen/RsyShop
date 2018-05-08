@@ -20,7 +20,9 @@ class CheckTokenController extends Controller
 {
     private $token = '';
 
-    protected function initialize()
+    protected $checkAccessAuth = false;
+
+    protected function init()
     {
         $this->adminAuthLogic = new AdminAuthLogic();
     }
@@ -43,10 +45,23 @@ class CheckTokenController extends Controller
             $this->errorMessage = $e->getMessage();
             return false;
         }
+        if ($userInfo['etime'] < time()) {
+            $this->errorCode = ErrorEnum::LOGIN_STATUS_CHECK_ERROR;
+            $this->errorMessage = 'token失效，请重新登录';
+            return false;
+        }
         $this->respData['user_id'] = $userInfo['user_id'];
         $this->respData['username'] = $userInfo['username'];
         $this->respData['token'] = $userInfo['token'];
         $this->respData['ctime'] = $userInfo['ctime'];
         $this->respData['etime'] = $userInfo['etime'];
+        $this->respData['priv'] = [
+            'system', 
+                'systemSetting', 
+                    'systemSettingSite', 'systemSettingUpload', //'systemSettingEmail',
+            'goods',
+                'goodsManage',
+                    'goodsManageList',
+        ];
     }
 }

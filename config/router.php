@@ -11,6 +11,7 @@
 
 $adminRouterMap = [
     'login' => 'Admin\\User\\LoginController',
+    'checktoken' => 'Admin\\User\\CheckTokenController',
 ];
 
 return [
