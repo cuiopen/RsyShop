@@ -27,10 +27,12 @@ class Controller extends BaseController
         if (method_exists($this, 'init')) {
             $this->init();
         }
+        
+        $requestCheckStatus = true;
         if (method_exists($this, 'request')) {
-            $this->request($this->request);
+            $requestCheckStatus = $this->request($this->request);
         }
-        if (method_exists($this, 'main')) {
+        if (false !== $requestCheckStatus && method_exists($this, 'main')) {
             $this->main();
         }
     }

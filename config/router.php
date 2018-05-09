@@ -12,6 +12,10 @@
 $adminRouterMap = [
     'login' => 'Admin\\User\\LoginController',
     'checktoken' => 'Admin\\User\\CheckTokenController',
+    'system' => [
+        'sitesetting' => 'Admin\\System\\UpdateSiteSettingController',
+        'getsitesetting' => 'Admin\\System\\GetSiteSettingController',
+    ],
 ];
 
 return [

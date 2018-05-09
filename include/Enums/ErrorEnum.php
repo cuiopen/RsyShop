@@ -14,6 +14,7 @@ namespace App\Enums;
 class ErrorEnum
 {
     const PARAM_ERRYR  = '10001=>参数错误';
+    const SYSTEM_ERROR = '10002=>系统错误';
 
     const LOGIN_ERROR  = '30001=>登录错误';
     const LOGIN_STATUS_CHECK_ERROR  = '30002=>登录验证失败';

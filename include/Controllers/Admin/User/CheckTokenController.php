@@ -58,10 +58,16 @@ class CheckTokenController extends Controller
         $this->respData['priv'] = [
             'system', 
                 'systemSetting', 
-                    'systemSettingSite', 'systemSettingUpload', //'systemSettingEmail',
+                    'systemSettingSite', 'systemSettingUpload', 'systemSettingEmail',
+                'systemPay',
+                    'systemPayType', 'systemSettingArea', 'systemSettingDistrict', 'systemPayExpress', 'systemPayFare', 
+                'systemAdmin',
+                    'systemAdminList', 'systemAdminRole', 'systemAdminLog',
+                'systemUpdate',
+
             'goods',
-                'goodsManage',
-                    'goodsManageList',
+            'goodsManage',
+            'goodsManageList',
         ];
     }
 }

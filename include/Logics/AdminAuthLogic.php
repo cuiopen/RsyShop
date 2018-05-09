@@ -16,6 +16,7 @@ use App\Libs\Encrypt\Password;
 use App\Libs\Encrypt\Rand;
 use App\Models\AdminUser;
 use App\Models\AdminToken;
+use Exception;
 
 class AdminAuthLogic
 {
