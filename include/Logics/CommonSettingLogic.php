@@ -20,6 +20,14 @@ class CommonSettingLogic
         'code', 'icp', 'copyright', 'siteswitch', 'closedreason',
     ];
 
+    public $uploadSettingKeys = [
+        'picmaxsize', 'picallowext', 
+    ];
+
+    public $emailSettingKeys = [
+        'smtpserver', 'smtpport', 'smtpfrom', 'smtpuser', 'smtppass', 'smtptest', 
+    ];
+
     public function updateSetting(array $updateData)
     {
         $arrKeys = [];

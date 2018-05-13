@@ -15,6 +15,10 @@ $adminRouterMap = [
     'system' => [
         'sitesetting' => 'Admin\\System\\UpdateSiteSettingController',
         'getsitesetting' => 'Admin\\System\\GetSiteSettingController',
+        'uploadsetting' => 'Admin\\System\\UpdateUploadSettingController',
+        'getuploadsetting' => 'Admin\\System\\GetUploadSettingController',
+        'emailsetting' => 'Admin\\System\\EmailSettingController',
+        'getemailsetting' => 'Admin\\System\\GetEmailSettingController',
     ],
 ];
 
